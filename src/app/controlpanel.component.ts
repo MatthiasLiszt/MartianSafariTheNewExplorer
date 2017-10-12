@@ -1,7 +1,7 @@
 
-import { Component } from '@angular/core';
-//import {TimerWrapper} from '@angular/core/src/facade/async';
+import { Component, ViewChild } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+
 
 
 @Component({
@@ -29,8 +29,9 @@ export class Controlpanel{
  height=0;
  speed=0;
  fuel=0;
- thrust=0;
  angle=0;
+ thrust=0;
+
 
  onThrustPlusPlus(){
   this.thrust+=12.5;
@@ -89,9 +90,14 @@ export class Controlpanel{
                         if(this.fuel<0){this.fuel=0;}
                         this.height=Math.round((this.height-this.speed)*100)/100;
                         if(this.height<0){this.height=0;}
-                       }
+                       } 
     
                      } , 100 );
+ }
+
+ getValues(){
+  var x=this.height;
+  return x;
  }
 }
 
