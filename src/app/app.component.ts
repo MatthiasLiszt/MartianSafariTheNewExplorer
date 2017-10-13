@@ -8,7 +8,7 @@ import {Monitor} from './monitor.component';
              <button (click)="onStartbutton()">Start</button>
              <button>Reset</button><button>Background</button> 
              </div>
-             <h3>{{where}}</h3>
+             <h3>{{where}}&nbsp;{{wheremessage}}</h3>
              <div id="monitor"><monitor></monitor> </div>
              <controlpanel id="controlpanel"></controlpanel>
              <p>modified {{title}}</p>`,
@@ -18,6 +18,7 @@ import {Monitor} from './monitor.component';
 export class AppComponent {
   title = 'My First Angular App';
   where=0;
+  wheremessage=' ';
   
   @ViewChild(Controlpanel) control: Controlpanel;
   @ViewChild(Monitor) monitor: Monitor;
@@ -25,9 +26,12 @@ export class AppComponent {
   onStartbutton(): void{
    //alert("start button clicked");
    this.control.startIt();
-   setInterval( () => { var x=this.control.getValues();
-                        this.where=x;
-                        this.monitor.renderShip(x);
+   setInterval( () => { var g=this.control.getValues();
+                        this.where=g.height;
+                        this.monitor.renderShip(g.height,g.angle,g.deltaV,g.fuel);
+                        if(g.height>15000){this.wheremessage='you reached outer space';}
+                        if(g.height<15000){this.wheremessage=' ';}
+                        if(g.height==0){this.wheremessage='somehow on the ground';}  
                       } , 200);
   }
 }

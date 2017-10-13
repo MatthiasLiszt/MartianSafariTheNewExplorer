@@ -12,6 +12,7 @@ import {Observable} from 'rxjs/Observable';
              <p><strong>speed</strong>&nbsp;{{speed}}</p>
              <p><strong>fuel</strong>&nbsp;{{fuel}}</p> 
              <p><strong>thrust</strong>&nbsp;{{thrust}}</p>
+             <p><strong>&Delta;v</strong>&nbsp;{{deltaV}}</p>
              <p><strong>angle</strong>&nbsp;{{angle}}</p>            
              <p>&nbsp;</p>
              <p><button (click)="onThrustPlusPlus()">++</button><button (click)="onThrustPlus()">+</button>thrust
@@ -31,6 +32,7 @@ export class Controlpanel{
  fuel=0;
  angle=0;
  thrust=0;
+ deltaV=0;
 
 
  onThrustPlusPlus(){
@@ -74,6 +76,7 @@ export class Controlpanel{
   this.thrust=0;
   this.angle=0;
 
+
   
   setInterval( () => {var spacecraftMass=16000;
                       var xVelocity=3200;
@@ -82,7 +85,7 @@ export class Controlpanel{
                       var curFuel=this.fuel-fuelConsumption;
                       var curMass=curFuel+spacecraftMass;
                       var deltaV=xVelocity*fuelConsumption/curMass;
-                      var curSpeed=this.speed+marsG-deltaV;
+                      var curSpeed=this.speed+marsG-deltaV*(1-this.angle);
    
                       if(this.height>0)
                        {this.speed=Math.round(curSpeed*100)/100;
@@ -90,14 +93,19 @@ export class Controlpanel{
                         if(this.fuel<0){this.fuel=0;}
                         this.height=Math.round((this.height-this.speed)*100)/100;
                         if(this.height<0){this.height=0;}
+                        if(this.fuel>0){this.deltaV=Math.round(deltaV*10000)/10000;} 
                        } 
     
                      } , 100 );
  }
 
  getValues(){
-  var x=this.height;
-  return x;
+  var h=this.height;
+  var a=this.angle;
+  var d=this.deltaV;
+  var f=this.fuel;  
+  
+  return {height: h, angle: a, deltaV: d, fuel: f};
  }
 }
 

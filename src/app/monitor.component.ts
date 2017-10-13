@@ -12,22 +12,33 @@ import { Component } from '@angular/core';
               <circle cx="37" cy="26" r="3.5" fill="red" />
              </pattern>
              </defs>
-             <rect fill="url(#ufo)" [attr.width]="shipwidth" height="50" x="50" [attr.y]="ny"/> 
+             <rect fill="url(#ufo)" [attr.width]="shipwidth" height="50" [attr.x]="nx" [attr.y]="ny"/> 
              </svg> 
              </div>  
-             <p style="display:none">{{xxx}}</p>
+             <div style="display:none;">{{xxx}}</div>
             `
 })
 
-export class Monitor{
+export class Monitor{ 
   xxx=0;
   ny=50;
+  nx=160;
   shipwidth=0;
   //let blink=true;
   
-  renderShip(x){
-                this.xxx=x;
-                this.ny=300-(300/15000)*x; 
+  renderShip(h,a,d,f){
+                var screen=Math.floor((h-1)/5000);
+                var heightInScreen;
+               
+                heightInScreen=h-screen*5000;
+                this.xxx=heightInScreen; 
+       
+                if(f==8000){this.nx=160;}
+                this.ny=300-(300/5000)*heightInScreen; // 3 different screens per height
+                if(h<5000){this.ny=280-(280/5000)*h;}//bug correction
+                if(h>0){this.nx+=(30)*d*a;} // can not move on the ground
+                if(this.nx>300){this.nx=20;} // endless horizontal plane 
+                if(this.nx<20){this.nx=300;} // endless horizontal plane              
                 this.shipwidth=50;
 
               } 
