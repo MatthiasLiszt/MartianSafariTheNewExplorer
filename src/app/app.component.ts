@@ -28,7 +28,7 @@ export class AppComponent {
    this.control.startIt();
    setInterval( () => { var g=this.control.getValues();
                         this.where=g.height;
-                        this.monitor.renderShip(g.height,g.angle,g.deltaV,g.fuel);
+                        this.monitor.renderShip(g.height,g.velocity,g.fuel);
                         if(g.height>15000){this.wheremessage='you reached outer space';}
                         if(g.height<15000){this.wheremessage=' ';}
                         if(g.height==0){this.wheremessage='somehow on the ground';}  

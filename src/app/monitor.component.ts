@@ -26,7 +26,7 @@ export class Monitor{
   shipwidth=0;
   //let blink=true;
   
-  renderShip(h,a,d,f){
+  renderShip(h,v,f){
                 var screen=Math.floor((h-1)/5000);
                 var heightInScreen;
                
@@ -36,7 +36,7 @@ export class Monitor{
                 if(f==8000){this.nx=160;}
                 this.ny=300-(300/5000)*heightInScreen; // 3 different screens per height
                 if(h<5000){this.ny=280-(280/5000)*h;}//bug correction
-                if(h>0){this.nx+=(30)*d*a;} // can not move on the ground
+                if(h>0){this.nx+=(300/50000)*v;} // can not move on the ground
                 if(this.nx>300){this.nx=20;} // endless horizontal plane 
                 if(this.nx<20){this.nx=300;} // endless horizontal plane              
                 this.shipwidth=50;
