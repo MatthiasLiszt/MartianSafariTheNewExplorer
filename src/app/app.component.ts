@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import {Controlpanel} from './controlpanel.component';
 import {Monitor} from './monitor.component';
 
+
 @Component({
   selector: 'app-root',
   template: `<div id="mainline">

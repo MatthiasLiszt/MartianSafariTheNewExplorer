@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {martianlandscape} from './martianlandscape';
 
 @Component({
   selector: 'monitor',
@@ -42,5 +43,9 @@ export class Monitor{
                 this.shipwidth=50;
 
               } 
+  
+  renderWorld(height,screen){
+   let world=martianlandscape(7,320);
+  }            
  
 }

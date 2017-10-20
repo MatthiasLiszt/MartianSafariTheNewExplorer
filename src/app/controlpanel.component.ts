@@ -96,11 +96,13 @@ export class Controlpanel{
                       var deltaV=xVelocity*fuelConsumption/curMass;
                       var curSpeed=this.speed+marsG-deltaV*(1-this.angle);
                       var curVelocity=this.velocity+(deltaV*this.angle);
+                      var oldSpeed=this.speed;
 
                       if(this.height>0)
                        {this.speed=Math.round(curSpeed*100)/100;
                         this.fuel=Math.round((this.fuel-fuelConsumption)*100)/100;
-                        if(this.fuel<0){this.fuel=0;}
+                        if(this.fuel<0){this.fuel=0;
+                         this.speed=Math.round((oldSpeed+marsG)*100)/100;}
                         this.height=Math.round((this.height-this.speed)*100)/100;
                         if(this.height<0){this.height=0;}
                         if(this.fuel>0){this.deltaV=Math.round(deltaV*10000)/10000;} 
