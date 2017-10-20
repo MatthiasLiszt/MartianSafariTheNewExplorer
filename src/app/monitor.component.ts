@@ -15,16 +15,18 @@ import {martianlandscape} from './martianlandscape';
              </defs>
              <rect fill="url(#ufo)" [attr.width]="shipwidth" height="50" [attr.x]="nx" [attr.y]="ny"/> 
              </svg> 
+             <p>{{world}}</p>
              </div>  
-             <div style="display:none;">{{xxx}}</div>
+             
             `
 })
 
 export class Monitor{ 
-  xxx=0;
+  
   ny=50;
   nx=160;
   shipwidth=0;
+  world='';
   //let blink=true;
   
   renderShip(h,v,f){
@@ -32,7 +34,7 @@ export class Monitor{
                 var heightInScreen;
                
                 heightInScreen=h-screen*5000;
-                this.xxx=heightInScreen; 
+                
        
                 if(f==8000){this.nx=160;}
                 this.ny=300-(300/5000)*heightInScreen; // 3 different screens per height
@@ -45,7 +47,13 @@ export class Monitor{
               } 
   
   renderWorld(height,screen){
-   let world=martianlandscape(7,320);
+   //var landscape=JSON.parse(martianlandscape(7,320));
+   var landscape=martianlandscape(7,320);
+
+   if(height<5000)
+    {//this.world=landscape.level[screen];
+     this.world=landscape; 
+    }//bonsxancon! ne kodu se vi ebriigxis
   }            
  
 }
