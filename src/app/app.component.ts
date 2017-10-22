@@ -33,7 +33,7 @@ export class AppComponent {
                        
                         this.where=g.height;
                         this.monitor.renderShip(g.height,g.velocity,g.fuel);
-                        this.monitor.renderWorld(g.height,0,this.landscape); 
+                        this.monitor.renderWorld(g.height,this.landscape); 
                         if(g.height>15000){this.wheremessage='you reached outer space';}
                         if(g.height<15000){this.wheremessage=' ';}
                         if(g.height==0){this.wheremessage='somehow on the ground';}  
