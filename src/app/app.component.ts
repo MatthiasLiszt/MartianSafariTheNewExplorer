@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import {Controlpanel} from './controlpanel.component';
 import {Monitor} from './monitor.component';
+import {martianlandscape} from './martianlandscape';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class AppComponent {
   title = 'My First Angular App';
   where=0;
   wheremessage=' ';
+  landscape=martianlandscape(7,320);
   
   @ViewChild(Controlpanel) control: Controlpanel;
   @ViewChild(Monitor) monitor: Monitor;
@@ -28,9 +30,10 @@ export class AppComponent {
    //alert("start button clicked");
    this.control.startIt();
    setInterval( () => { var g=this.control.getValues();
+                       
                         this.where=g.height;
                         this.monitor.renderShip(g.height,g.velocity,g.fuel);
-                        //this.monitor.renderWorld(g.height,0);
+                        this.monitor.renderWorld(g.height,0,this.landscape); 
                         if(g.height>15000){this.wheremessage='you reached outer space';}
                         if(g.height<15000){this.wheremessage=' ';}
                         if(g.height==0){this.wheremessage='somehow on the ground';}  

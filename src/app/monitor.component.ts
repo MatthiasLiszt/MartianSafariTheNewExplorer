@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {martianlandscape} from './martianlandscape';
+
 
 @Component({
   selector: 'monitor',
-  template: `<div>
+  template: `<div >
              <svg viewBox="0 0 320 320">
              <defs>
              <pattern id="ufo" x="0" y="0" width="52" height="52">
@@ -15,9 +15,10 @@ import {martianlandscape} from './martianlandscape';
              </defs>
              <rect fill="url(#ufo)" [attr.width]="shipwidth" height="50" [attr.x]="nx" [attr.y]="ny"/> 
              </svg> 
-             <p>{{world}}</p>
-             </div>  
              
+             </div>
+             <p>{{land}}</p>
+             <img [attr.src]="land"/>
             `
 })
 
@@ -27,7 +28,10 @@ export class Monitor{
   nx=160;
   shipwidth=0;
   world='';
-  //let blink=true;
+  sample="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320' width='320px' height='320px '>";
+  sample2="<polygon points='60,20 100,40 100,80 60,100 20,80 20,40'/></svg>";
+  base64=window.btoa(this.sample+this.sample2);
+  land="data:image/svg+xml;base64,"+this.base64;
   
   renderShip(h,v,f){
                 var screen=Math.floor((h-1)/5000);
@@ -46,14 +50,14 @@ export class Monitor{
 
               } 
   
-  renderWorld(height,screen){
-   //var landscape=JSON.parse(martianlandscape(7,320));
-   var landscape=martianlandscape(7,320);
+  renderWorld(height,screen,worlddata){
+   
 
    if(height<5000)
-    {//this.world=landscape.level[screen];
-     this.world=landscape; 
-    }//bonsxancon! ne kodu se vi ebriigxis
+    {
+     var parsed=JSON.parse(worlddata);
+     this.world=parsed.level[screen];
+    }
   }            
  
 }
